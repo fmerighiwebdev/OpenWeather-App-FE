@@ -1,0 +1,240 @@
+.weather-dashboard {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    position: relative;
+}
+
+.today-weather-container {
+    height: 50vh;
+    background-image: url('../images/home-bg.svg');
+    background-size: cover;
+    position: relative;
+}
+
+.clear-bg {
+    background-image: url('../images/clear-bg.svg');
+}
+
+.cloud-bg {
+    background-image: url('../images/cloud-bg.svg');
+}
+
+.rain-bg {
+    background-image: url('../images/rain-bg.svg');
+}
+
+.snow-bg {
+    background-image: url('../images/snow-bg.svg');
+}
+
+.thunderstorm-bg {
+    background-image: url('../images/thunderstorm-bg.svg');
+}
+
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to top, rgb(255, 255, 255), transparent);
+}
+
+.weather-card {
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    background-color: white;
+    width: min(400px, 90%);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.weather-card-title h2 {
+    font-size: 3rem;
+    color: rgb(65, 65, 65);
+    font-weight: 600;
+}
+
+.weather-card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.temp {
+    font-size: 2.5rem;
+    color: rgb(65, 65, 65);
+    font-weight: 500;
+    border-radius: 50%;
+    width: 100px;
+    text-align: center;
+    padding-block: 1.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.weather-main {
+    margin-top: 1rem;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 400;
+    color: rgb(65, 65, 65);
+}
+
+.weather-desc {
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: rgb(65, 65, 65);
+}
+
+.weather-card-footer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.weather-card-footer p {
+    color: rgb(65, 65, 65);
+    font-weight: 300;
+}
+
+.weather-card-footer span {
+    color: grey;
+    font-weight: 400;
+}
+
+.hour-disclaimer {
+    font-size: .75rem;
+    color: grey;
+}
+
+.weather-forecast {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.weather-forecast h2 {
+    font-size: 2rem;
+    color: rgb(65, 65, 65);
+    font-weight: 600;
+}
+
+.forecast-cards {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-block: 1.5rem;
+}
+
+.forecast-card {
+    background-color: white;
+    width: 300px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.forecast-card-title h2 {
+    font-size: 1.5rem;
+    color: rgb(65, 65, 65);
+    font-weight: 600;
+}
+
+.forecast-card-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forecast-card-footer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.forecast-card-footer span {
+    color: grey;
+    font-weight: 400;
+}
+
+.weather-hourly {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 90%;
+    margin: 10rem auto;
+}
+
+.weather-hourly h2 {
+    font-size: 2rem;
+    color: rgb(65, 65, 65);
+    font-weight: 600;
+}
+
+.hourly-cards {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding-block: 1.5rem;
+    padding-inline: 1rem;
+}
+
+.hourly-card {
+    background-color: white;
+    width: 200px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+}
+
+.loading-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top: 5px solid rgb(65, 65, 65);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

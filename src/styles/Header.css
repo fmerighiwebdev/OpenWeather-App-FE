@@ -1,0 +1,53 @@
+header {
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    padding: 2rem 0 0 0;
+}
+
+header nav {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
+header nav ul li {
+    list-style: none;
+}
+
+header nav ul li:nth-child(1) a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #0044FF;
+    padding: .75rem 1.5rem;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all .3s;
+}
+
+header nav ul li:nth-child(1) a:hover {
+    background-color: #0033CC;
+}
+
+header nav ul li:nth-child(2) a {
+    text-decoration: none;
+    color: #0044FF;
+    background-color: #fff;
+    padding: .75rem 1.5rem;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all .3s;
+}
+
+header nav ul li:nth-child(2) a:hover {
+    background-color: #f2f2f2;
+}
