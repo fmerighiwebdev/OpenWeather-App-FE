@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "../styles/Auth.css";
 
-import { signUp } from "../client-utils";
+import { signUp, logIn } from "../client-utils";
 
 function AuthForm({ type }) {
   const [user, setUser] = React.useState({
@@ -29,6 +29,9 @@ function AuthForm({ type }) {
     if (type === "signup") {
       signUp(user.name, user.username, user.email, user.password);
       navigate("/login");
+    } else if (type === "login") {
+      logIn(user.email, user.password);
+      navigate("/");
     }
 
     setUser({

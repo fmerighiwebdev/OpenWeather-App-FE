@@ -34,4 +34,33 @@ async function signUp(name, username, email, password) {
   }
 }
 
-export { getWeather, signUp };
+async function logIn(email, password) {
+  try {
+    const response = await axios.post("http://localhost:5000/api/login", {
+      email,
+      password
+    });
+    localStorage.setItem("token", response.data.token);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function validateToken(token, setIsTokenValid, setLoading) {
+  try {
+    const response = await axios.get("http://localhost:5000/api/validateToken", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log(response.data);
+    setIsTokenValid(true);
+  } catch (err) {
+    console.log(err);
+    setIsTokenValid(false);
+  } finally {
+    setLoading(false);
+  }
+}
+
+export { getWeather, signUp, logIn, validateToken };
