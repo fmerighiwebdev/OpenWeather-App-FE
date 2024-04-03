@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 
 import "../styles/Header.css";
 
-import { validateToken } from "../client-utils";
+import { validateToken, getUser } from "../client-utils";
 
 function Header({ isTokenValid, setIsTokenValid }) {
-
   const [loading, setLoading] = React.useState(true);
+  const [user, setUser] = React.useState({});
   const token = localStorage.getItem("token");
 
   React.useEffect(() => {
     validateToken(token, setIsTokenValid, setLoading);
+    getUser(token, setUser);
   }, [token, setIsTokenValid]);
 
   return (
@@ -24,16 +25,30 @@ function Header({ isTokenValid, setIsTokenValid }) {
       <nav>
         <ul>
           {isTokenValid ? (
-            <li>
-              <Link to="/">Preferiti</Link>
-            </li>
+            <>
+              <p className="greetings">
+                Ciao, <span>{user.name}</span>
+              </p>
+              <li>
+                <Link className="primary-btn" to="/favourites">
+                  Preferiti
+                </Link>
+              </li>
+              <li>
+                <button className="logout-btn">Esci</button>
+              </li>
+            </>
           ) : (
             <>
               <li>
-                <Link to="/signup">Registrati</Link>
+                <Link className="primary-btn" to="/signup">
+                  Registrati
+                </Link>
               </li>
               <li>
-                <Link to="/login">Accedi</Link>
+                <Link className="secondary-btn" to="/login">
+                  Accedi
+                </Link>
               </li>
             </>
           )}

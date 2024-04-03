@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Header from "./components/Header";
+import Favourites from "./components/Favourites";
 
 import "./styles/App.css";
 
@@ -35,13 +36,14 @@ function App() {
           path="/weather-data"
           element={
             <>
-              <Dashboard city={city} />
+              <Dashboard city={city} isTokenValid={isTokenValid} setIsTokenValid={setIsTokenValid} />
               <Footer />
             </>
           }
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/favourites" element={<Favourites />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </Router>

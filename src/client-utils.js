@@ -26,7 +26,7 @@ async function signUp(name, username, email, password) {
       name,
       username,
       email,
-      password
+      password,
     });
     console.log(response.data);
   } catch (err) {
@@ -38,21 +38,25 @@ async function logIn(email, password) {
   try {
     const response = await axios.post("http://localhost:5000/api/login", {
       email,
-      password
+      password,
     });
     localStorage.setItem("token", response.data.token);
+    console.log(response.data);
   } catch (err) {
-    console.log(err);
+    console.log(err.response.data);
   }
 }
 
 async function validateToken(token, setIsTokenValid, setLoading) {
   try {
-    const response = await axios.get("http://localhost:5000/api/validateToken", {
-      headers: {
-        Authorization: `Bearer ${token}`
+    const response = await axios.get(
+      "http://localhost:5000/api/validateToken",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    });
+    );
     console.log(response.data);
     setIsTokenValid(true);
   } catch (err) {
@@ -63,4 +67,20 @@ async function validateToken(token, setIsTokenValid, setLoading) {
   }
 }
 
-export { getWeather, signUp, logIn, validateToken };
+async function getUser(token, setUser) {
+  try {
+    const response = await axios.get(
+      "http://localhost:5000/api/validateToken",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setUser(response.data.user);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export { getWeather, signUp, logIn, validateToken, getUser };

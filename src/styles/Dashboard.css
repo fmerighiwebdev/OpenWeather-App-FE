@@ -219,6 +219,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url('../images/home-bg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .loading-spinner {
@@ -230,11 +233,49 @@
     animation: spin 1s linear infinite;
 }
 
+.add-favourites {
+    position: absolute;
+    bottom: 1rem;
+    right: 9rem;
+    background-color: white;
+    padding: .75rem 1.25rem;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.add-favourites button {
+    background-color: white;
+    border: none;
+    font-size: 1.125rem;
+    color: rgb(65, 65, 65);
+    cursor: pointer;
+}
+
+.add-favourites img {
+    animation: heartbeat 1s linear infinite;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
     }
 }
