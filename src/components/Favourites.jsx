@@ -7,16 +7,30 @@ import { getFavourites } from "../client-utils";
 
 function Favourites({ setCity }) {
   const [favourites, setFavourites] = React.useState([]);
+  const [success, setSuccess] = React.useState("");
   const token = localStorage.getItem("token");
 
   React.useEffect(() => {
     getFavourites(token, setFavourites);
   }, [token]);
 
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSuccess("");
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [success]);
+
   return (
     <section className="favourites-container">
-      <h2>I tuoi preferiti</h2>
-      {favourites.length === 0 && <p>Non hai città preferite</p>}
+      {success && (
+        <p className="success-message">
+          {success}
+        </p>
+      )}
+      <h2>Le tue città preferite</h2>
+      {favourites.length === 0 && <p className="no-favourites">Non hai città preferite</p>}
       <ul>
         {favourites.map((favourite, index) => (
           <Favourite
@@ -25,6 +39,7 @@ function Favourites({ setCity }) {
             favourites={favourites}
             setFavourites={setFavourites}
             setCity={setCity}
+            setSuccess={setSuccess}
           />
         ))}
       </ul>

@@ -14,6 +14,7 @@ import "./styles/App.css";
 function App() {
   const [city, setCity] = React.useState(sessionStorage.getItem("city")) || "";
   const [isTokenValid, setIsTokenValid] = React.useState(null);
+  const [success, setSuccess] = React.useState("");
 
   return (
     <Router>
@@ -26,8 +27,9 @@ function App() {
               <Header
                 isTokenValid={isTokenValid}
                 setIsTokenValid={setIsTokenValid}
+                setSuccess={setSuccess}
               />
-              <Home setCity={setCity} city={city} />
+              <Home setCity={setCity} city={city} success={success} setSuccess={setSuccess} />
             </>
           }
         />

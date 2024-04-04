@@ -99,16 +99,16 @@ async function getFavourites(token, setFavourites) {
   }
 }
 
-async function logOut(token, setIsTokenValid) {
+async function logOut(token, setIsTokenValid, setSuccess) {
   try {
     const response = await axios.get("http://localhost:5000/api/logout", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data);
     localStorage.removeItem("token");
     setIsTokenValid(false);
+    setSuccess(response.data.message);
   } catch (err) {
     console.log(err);
   }

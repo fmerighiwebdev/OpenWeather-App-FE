@@ -5,7 +5,7 @@ import "../styles/Header.css";
 
 import { validateToken, getUser, logOut } from "../client-utils";
 
-function Header({ isTokenValid, setIsTokenValid }) {
+function Header({ isTokenValid, setIsTokenValid, setSuccess }) {
   const [loading, setLoading] = React.useState(true);
   const [user, setUser] = React.useState({});
   const token = localStorage.getItem("token");
@@ -16,7 +16,7 @@ function Header({ isTokenValid, setIsTokenValid }) {
   }, [token, setIsTokenValid]);
 
   function handleLogout() {
-    logOut(token, setIsTokenValid);
+    logOut(token, setIsTokenValid, setSuccess);
   }
 
   return (

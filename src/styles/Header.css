@@ -8,7 +8,7 @@ header {
 }
 
 header nav {
-    width: min(1200px, 90%);
+    width: min(1000px, 90%);
     margin: 0 auto;
 }
 
@@ -25,6 +25,7 @@ header nav ul li {
 
 .primary-btn {
     text-decoration: none;
+    display: block;
     color: #fff;
     background-color: #0044FF;
     padding: .75rem 1.5rem;
@@ -40,6 +41,7 @@ header nav ul li {
 
 .secondary-btn {
     text-decoration: none;
+    display: block;
     color: #0044FF;
     background-color: #fff;
     padding: .75rem 1.5rem;
@@ -64,6 +66,10 @@ header nav ul li {
     transition: all .3s;
     border: none;
     cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #CC0000;
 }
 
 .greetings {
