@@ -9,21 +9,35 @@ import TodayWeather from "./TodayWeather";
 import ForecastWeather from "./ForecastWeather";
 import HourlyWeather from "./HourlyWeather";
 
-import { getWeather, validateToken } from "../client-utils";
+import { getWeather, validateToken, getFavourites } from "../client-utils";
 
 function Dashboard({ city, isTokenValid, setIsTokenValid }) {
   const [weatherData, setWeatherData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [isFavourite, setIsFavourite] = React.useState(false);
+  const [favourites, setFavourites] = React.useState([]);
   const token = localStorage.getItem("token");
 
   React.useEffect(() => {
-    validateToken(token, setIsTokenValid, setLoading);
     getWeather(city, setWeatherData, setLoading);
+    getFavourites(token, setFavourites);
+    validateToken(token, setIsTokenValid, setLoading);
   }, [city, token, setIsTokenValid]);
 
-  async function handleFavourites() {
-    setIsFavourite((isFavourite) => !isFavourite);
+  React.useEffect(() => {
+    function checkFavourite() {
+      if (favourites.length === 0) return;
+      const isFavourite = favourites.some(
+        (favourite) => favourite.city === city
+      );
+      setIsFavourite(isFavourite);
+    }
+
+    checkFavourite();
+  }, [favourites, city]);
+
+  async function handleAddFavourite() {
+    setIsFavourite(true);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/addFavourite",
@@ -42,12 +56,10 @@ function Dashboard({ city, isTokenValid, setIsTokenValid }) {
     }
   }
 
-  console.log(isTokenValid);
-
   return (
     <section className="weather-dashboard">
       {loading && (
-        <div className="loading-container">
+        <div className="loading-container white-bg">
           <div className="loading-spinner"></div>
         </div>
       )}
@@ -70,7 +82,7 @@ function Dashboard({ city, isTokenValid, setIsTokenValid }) {
           <TodayWeather weatherData={weatherData} type="today" />
           {isTokenValid && (
             <div className="add-favourites">
-              <button onClick={handleFavourites}>
+              <button onClick={handleAddFavourite} disabled={isFavourite}>
                 {isFavourite ? "Aggiunto" : "Aggiungi ai preferiti"}
               </button>
               <img

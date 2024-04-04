@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "../styles/Header.css";
 
-import { validateToken, getUser } from "../client-utils";
+import { validateToken, getUser, logOut } from "../client-utils";
 
 function Header({ isTokenValid, setIsTokenValid }) {
   const [loading, setLoading] = React.useState(true);
@@ -14,6 +14,10 @@ function Header({ isTokenValid, setIsTokenValid }) {
     validateToken(token, setIsTokenValid, setLoading);
     getUser(token, setUser);
   }, [token, setIsTokenValid]);
+
+  function handleLogout() {
+    logOut(token, setIsTokenValid);
+  }
 
   return (
     <header>
@@ -35,7 +39,9 @@ function Header({ isTokenValid, setIsTokenValid }) {
                 </Link>
               </li>
               <li>
-                <button className="logout-btn">Esci</button>
+                <button className="logout-btn" onClick={handleLogout}>
+                  Esci
+                </button>
               </li>
             </>
           ) : (

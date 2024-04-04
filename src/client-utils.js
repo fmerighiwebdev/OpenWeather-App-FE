@@ -83,4 +83,35 @@ async function getUser(token, setUser) {
   }
 }
 
-export { getWeather, signUp, logIn, validateToken, getUser };
+async function getFavourites(token, setFavourites) {
+  try {
+    const response = await axios.get(
+      "http://localhost:5000/api/getFavourites",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setFavourites(response.data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function logOut(token, setIsTokenValid) {
+  try {
+    const response = await axios.get("http://localhost:5000/api/logout", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response.data);
+    localStorage.removeItem("token");
+    setIsTokenValid(false);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export { getWeather, signUp, logIn, validateToken, getUser, getFavourites, logOut };

@@ -36,14 +36,18 @@ function App() {
           path="/weather-data"
           element={
             <>
-              <Dashboard city={city} isTokenValid={isTokenValid} setIsTokenValid={setIsTokenValid} />
+              <Dashboard
+                city={city}
+                isTokenValid={isTokenValid}
+                setIsTokenValid={setIsTokenValid}
+              />
               <Footer />
             </>
           }
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/favourites" element={<Favourites />} />
+        <Route path="/favourites" element={<Favourites setCity={setCity} />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </Router>
