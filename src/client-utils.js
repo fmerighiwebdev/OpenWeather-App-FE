@@ -20,7 +20,7 @@ async function getWeather(city, setWeatherData, setLoading) {
   }
 }
 
-async function signUp(name, username, email, password) {
+async function signUp(name, username, email, password, setError, navigate) {
   try {
     const response = await axios.post("http://localhost:5000/api/signup", {
       name,
@@ -29,12 +29,17 @@ async function signUp(name, username, email, password) {
       password,
     });
     console.log(response.data);
+    navigate("/login");
   } catch (err) {
-    console.log(err);
+    if (err.response) {
+      setError(err.response.data.message);
+    } else {
+      setError("Errore durante la richiesta di registrazione.");
+    }
   }
 }
 
-async function logIn(email, password) {
+async function logIn(email, password, setError, navigate) {
   try {
     const response = await axios.post("http://localhost:5000/api/login", {
       email,
@@ -42,8 +47,13 @@ async function logIn(email, password) {
     });
     localStorage.setItem("token", response.data.token);
     console.log(response.data);
+    navigate("/");
   } catch (err) {
-    console.log(err.response.data);
+    if (err.response) {
+      setError(err.response.data.message);
+    } else {
+      setError("Errore durante la richiesta di accesso.");
+    }
   }
 }
 
@@ -114,4 +124,12 @@ async function logOut(token, setIsTokenValid, setSuccess) {
   }
 }
 
-export { getWeather, signUp, logIn, validateToken, getUser, getFavourites, logOut };
+export {
+  getWeather,
+  signUp,
+  logIn,
+  validateToken,
+  getUser,
+  getFavourites,
+  logOut,
+};

@@ -13,6 +13,7 @@ function AuthForm({ type }) {
     email: "",
     password: "",
   });
+  const [error, setError] = React.useState("");
 
   const navigate = useNavigate();
 
@@ -27,11 +28,16 @@ function AuthForm({ type }) {
     e.preventDefault();
 
     if (type === "signup") {
-      signUp(user.name, user.username, user.email, user.password);
-      navigate("/login");
+      signUp(
+        user.name,
+        user.username,
+        user.email,
+        user.password,
+        setError,
+        navigate
+      );
     } else if (type === "login") {
-      logIn(user.email, user.password);
-      navigate("/");
+      logIn(user.email, user.password, setError, navigate);
     }
 
     setUser({
@@ -43,8 +49,9 @@ function AuthForm({ type }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} autoComplete="off">
       <h2>{type === "login" ? "Accedi" : "Registrati"}</h2>
+      {error && <p className="error-message">{error}</p>}
       {type === "signup" && (
         <div className="form-block">
           <label htmlFor="name">Nome*</label>
@@ -53,7 +60,6 @@ function AuthForm({ type }) {
             id="name"
             name="name"
             value={user.name}
-            required
             onChange={handleChanges}
           />
         </div>
@@ -66,7 +72,6 @@ function AuthForm({ type }) {
             id="username"
             name="username"
             value={user.username}
-            required
             onChange={handleChanges}
           />
         </div>
@@ -78,7 +83,6 @@ function AuthForm({ type }) {
           id="email"
           name="email"
           value={user.email}
-          required
           onChange={handleChanges}
         />
       </div>
@@ -89,7 +93,6 @@ function AuthForm({ type }) {
           id="password"
           name="password"
           value={user.password}
-          required
           onChange={handleChanges}
         />
       </div>
