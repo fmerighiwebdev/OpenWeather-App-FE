@@ -14,6 +14,7 @@
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeInFromBottom .5s ease-out;
 }
 
 .login-page form h2, .signup-page form h2 {
@@ -75,4 +76,21 @@
 .login-page form p a, .signup-page form p a {
   color: rgb(0, 123, 255);
   text-decoration: none;
+}
+
+@keyframes fadeInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login-page, .signup-page {
+    height: 87.5vh;
+  }
 }

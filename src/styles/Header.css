@@ -5,6 +5,7 @@ header {
     top: 0;
     left: 0;
     padding: 2rem 0 0 0;
+    transition: all .3s;
 }
 
 header nav {
@@ -76,9 +77,95 @@ header nav ul li {
     color: #fff;
     font-size: 1.2rem;
     font-weight: 500;
+    transition: all .3s;
 }
 
 .greetings span {
     text-transform: uppercase;
     font-weight: 700;
+}
+
+.desktop-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.hamburger-menu {
+    display: none;
+    transition: all .3s;
+}
+
+@keyframes fadeInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .desktop-menu {
+        display: none;
+    }
+
+    .header-active {
+        background-color: white;
+        padding: 2rem 0 1rem 0;
+    }
+
+    .header-active .greetings {
+        color: black;
+    }
+
+    .header-active .hamburger-menu .line {
+        background-color: black;
+    }
+
+    .hamburger-menu {
+        display: block;
+    }
+
+    .line {
+        width: 30px;
+        height: 3px;
+        background-color: #fff;
+        margin: 5px;
+        transition: all .3s;
+    }
+
+    .hamburger-menu.active .line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger-menu.active .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger-menu.active .line:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .mobile-menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        gap: 2rem;
+        transition: all .3s;
+        padding: 2rem 0;
+        animation: fadeInFromTop .75s forwards;
+    }
+
+    .mobile-menu ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        gap: 1rem;
+    }
 }

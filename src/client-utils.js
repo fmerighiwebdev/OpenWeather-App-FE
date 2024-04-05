@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+const BASE_URL = "https://6cba-151-69-103-214.ngrok-free.app";
 
 async function getWeather(city, setWeatherData, setLoading) {
   try {
@@ -22,7 +23,7 @@ async function getWeather(city, setWeatherData, setLoading) {
 
 async function signUp(name, username, email, password, setError, navigate) {
   try {
-    const response = await axios.post("http://localhost:5000/api/signup", {
+    const response = await axios.post(`${BASE_URL}/api/signup`, {
       name,
       username,
       email,
@@ -41,7 +42,7 @@ async function signUp(name, username, email, password, setError, navigate) {
 
 async function logIn(email, password, setError, navigate) {
   try {
-    const response = await axios.post("http://localhost:5000/api/login", {
+    const response = await axios.post(`${BASE_URL}/api/login`, {
       email,
       password,
     });
@@ -60,7 +61,7 @@ async function logIn(email, password, setError, navigate) {
 async function validateToken(token, setIsTokenValid, setLoading) {
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/validateToken",
+      `${BASE_URL}/api/validateToken`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -80,7 +81,7 @@ async function validateToken(token, setIsTokenValid, setLoading) {
 async function getUser(token, setUser) {
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/validateToken",
+      `${BASE_URL}/api/validateToken`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -96,7 +97,7 @@ async function getUser(token, setUser) {
 async function getFavourites(token, setFavourites) {
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/getFavourites",
+      `${BASE_URL}/api/getFavourites`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -109,9 +110,53 @@ async function getFavourites(token, setFavourites) {
   }
 }
 
+async function removeFavourite(
+  token,
+  favourite,
+  favourites,
+  setFavourites,
+  setSuccess
+) {
+  setSuccess("");
+  try {
+    const response = await axios.delete(
+      `${BASE_URL}/api/removeFavourite/${favourite.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setFavourites(favourites.filter((fav) => fav.id !== favourite.id));
+    setSuccess(response.data.message);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function addFavourite(token, city, setIsFavourite) {
+  setIsFavourite(true);
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/addFavourite`,
+      {
+        city,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function logOut(token, setIsTokenValid, setSuccess) {
   try {
-    const response = await axios.get("http://localhost:5000/api/logout", {
+    const response = await axios.get(`${BASE_URL}/api/logout`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -132,4 +177,6 @@ export {
   getUser,
   getFavourites,
   logOut,
+  removeFavourite,
+  addFavourite
 };

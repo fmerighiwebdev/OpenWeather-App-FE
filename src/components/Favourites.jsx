@@ -24,13 +24,11 @@ function Favourites({ setCity }) {
 
   return (
     <section className="favourites-container">
-      {success && (
-        <p className="success-message">
-          {success}
-        </p>
-      )}
+      {success && <p className="success-message">{success}</p>}
       <h2>Le tue città preferite</h2>
-      {favourites.length === 0 && <p className="no-favourites">Non hai città preferite</p>}
+      {favourites.length === 0 && (
+        <p className="no-favourites">Non hai città preferite</p>
+      )}
       <ul>
         {favourites.map((favourite, index) => (
           <Favourite

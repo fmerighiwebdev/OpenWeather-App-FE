@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 import "../styles/Dashboard.css";
 import heartFull from "../images/heart-full.svg";
@@ -9,7 +8,7 @@ import TodayWeather from "./TodayWeather";
 import ForecastWeather from "./ForecastWeather";
 import HourlyWeather from "./HourlyWeather";
 
-import { getWeather, validateToken, getFavourites } from "../client-utils";
+import { getWeather, validateToken, getFavourites, addFavourite } from "../client-utils";
 
 function Dashboard({ city, isTokenValid, setIsTokenValid }) {
   const [weatherData, setWeatherData] = React.useState([]);
@@ -37,23 +36,7 @@ function Dashboard({ city, isTokenValid, setIsTokenValid }) {
   }, [favourites, city]);
 
   async function handleAddFavourite() {
-    setIsFavourite(true);
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/api/addFavourite",
-        {
-          city,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response.data);
-    } catch (err) {
-      console.log(err);
-    }
+    addFavourite(token, city, setIsFavourite);
   }
 
   return (

@@ -8,6 +8,7 @@ import { validateToken, getUser, logOut } from "../client-utils";
 function Header({ isTokenValid, setIsTokenValid, setSuccess }) {
   const [loading, setLoading] = React.useState(true);
   const [user, setUser] = React.useState({});
+  const [isActive, setIsActive] = React.useState(false);
   const token = localStorage.getItem("token");
 
   React.useEffect(() => {
@@ -17,10 +18,15 @@ function Header({ isTokenValid, setIsTokenValid, setSuccess }) {
 
   function handleLogout() {
     logOut(token, setIsTokenValid, setSuccess);
+    setIsActive(false);
+  }
+
+  function handleActiveMenu() {
+    setIsActive(!isActive);
   }
 
   return (
-    <header>
+    <header className={isActive ? "header-active" : null}>
       {loading && (
         <div className="loading-container">
           <div className="loading-spinner"></div>
@@ -33,16 +39,23 @@ function Header({ isTokenValid, setIsTokenValid, setSuccess }) {
               <p className="greetings">
                 Ciao, <span>{user.name}</span>
               </p>
-              <li>
-                <Link className="primary-btn" to="/favourites">
-                  Preferiti
-                </Link>
-              </li>
-              <li>
-                <button className="logout-btn" onClick={handleLogout}>
-                  Esci
-                </button>
-              </li>
+              <div className="desktop-menu">
+                <li>
+                  <Link className="primary-btn" to="/favourites">
+                    Preferiti
+                  </Link>
+                </li>
+                <li>
+                  <button className="logout-btn" onClick={handleLogout}>
+                    Esci
+                  </button>
+                </li>
+              </div>
+              <div className={isActive ? "hamburger-menu active" : "hambuger-menu"} onClick={handleActiveMenu}>
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+              </div>
             </>
           ) : (
             <>
@@ -60,6 +73,18 @@ function Header({ isTokenValid, setIsTokenValid, setSuccess }) {
           )}
         </ul>
       </nav>
+      {isActive && (
+        <div className="mobile-menu">
+          <ul>
+            <li>
+              <Link className="primary-btn" to="/favourites">Preferiti</Link>
+            </li>
+            <li>
+              <button className="logout-btn" onClick={handleLogout}>Esci</button>
+            </li>
+          </ul>
+        </div>
+      )}
     </header>
   );
 }

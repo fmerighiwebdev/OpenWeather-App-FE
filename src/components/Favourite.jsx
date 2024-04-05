@@ -1,27 +1,14 @@
 import React from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+import { removeFavourite } from "../client-utils";
 
 function Favourite({ favourite, favourites, setFavourites, setCity, setSuccess }) {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   async function handleRemoveFavourite() {
-    setSuccess("");
-    try {
-      const response = await axios.delete(
-        `http://localhost:5000/api/removeFavourite/${favourite.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setFavourites(favourites.filter((fav) => fav.id !== favourite.id));
-      setSuccess(response.data.message);
-    } catch (err) {
-      console.log(err);
-    }
+    removeFavourite(token, favourite, favourites, setFavourites, setSuccess);
   }
 
   function handleFavouriteClick() {
