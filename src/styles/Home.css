@@ -19,6 +19,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: fadeInFromBottom .5s ease-in-out;
 }
 
 .home-icon-container img {
@@ -34,6 +35,8 @@
 
 .home-search-container {
     width: 100%;
+    opacity: 0;
+    animation: fadeInFromBottom .5s .5s ease-in-out forwards;
 }
 
 .home-form {
@@ -137,15 +140,16 @@
     }
 }
 
-@keyframes fadeInFromTop {
+@keyframes fadeInFromBottom {
     from {
         opacity: 0;
-        transform: translateY(-50px);
+        transform: translateY(50px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
     }
+
 }
 
 @media screen and (max-width: 768px) {
