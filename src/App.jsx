@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Favourites from "./components/Favourites";
 
 import "./styles/App.css";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [city, setCity] = React.useState(sessionStorage.getItem("city")) || "";
@@ -50,7 +51,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/favourites" element={<Favourites setCity={setCity} />} />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
-const BASE_URL = "https://6cba-151-69-103-214.ngrok-free.app";
+const BASE_URL = "https://90e7-151-69-103-214.ngrok-free.app";
 
 async function getWeather(city, setWeatherData, setLoading) {
   try {

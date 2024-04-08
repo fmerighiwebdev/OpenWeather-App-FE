@@ -94,6 +94,29 @@
     animation: fadeIn .5s ease-in-out;
 }
 
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url('../images/home-bg.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+}
+
+.not-found-container img {
+    width: 250px;
+}
+
+.not-found-container p {
+    font-size: 1.5rem;
+    color: rgb(65, 65, 65);
+    text-align: center;
+    letter-spacing: 2px;
+}
+
 @keyframes fadeInFromRight {
     from {
         opacity: 0;
